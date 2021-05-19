@@ -18,7 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { EditProductComponent } from './containers/edit-product/edit-product.component';
 import { ProductFormComponent } from './components/product-form/product-form.component';
-
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 const routes: Routes = [
   {
     path: '',
@@ -64,6 +64,7 @@ const routes: Routes = [
     MatSelectModule,
     MatIconModule,
     MatProgressSpinnerModule,
+    MatAutocompleteModule
   ]
 })
 export class ProductsModule {

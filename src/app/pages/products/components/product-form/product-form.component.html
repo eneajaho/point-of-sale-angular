@@ -24,8 +24,19 @@
 
     <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-2">
       <mat-form-field class="full-width" appearance="outline">
-        <mat-label>Stock Type</mat-label>
-        <input type="text" matInput placeholder="Ex. cope" formControlName="stock_type">
+        <mat-label>Stock type</mat-label>
+        <mat-select formControlName="stock_type">
+          <mat-option [value]="'pcs'">
+            pcs
+          </mat-option>
+          <mat-option [value]="'l'">
+            l
+          </mat-option>
+          <mat-option [value]="'k'">
+            k
+          </mat-option>
+
+        </mat-select>
       </mat-form-field>
     </div>
 
@@ -40,6 +51,22 @@
       <mat-form-field class="full-width" appearance="outline">
         <mat-label>Optimal stock</mat-label>
         <input type="number" matInput placeholder="Ex. 40" formControlName="optimal_stock">
+      </mat-form-field>
+    </div>
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-2">
+      <mat-form-field appearance="outline">
+        <mat-label>Categories</mat-label>
+        <input type="text"
+               matInput
+               formControlName="category_id"
+               [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
+<!--          [displayWith]="displayFn"-->
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option.name}}
+          </mat-option>
+        </mat-autocomplete>
+
       </mat-form-field>
     </div>
 

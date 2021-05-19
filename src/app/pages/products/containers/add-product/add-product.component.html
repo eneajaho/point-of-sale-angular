@@ -7,9 +7,9 @@
       <h1 class="m-0">Add product</h1>
     </div>
 
-    <mat-card>
-      <mat-card-content>
-        <app-product-form (submitted)="handleAdd($event)"></app-product-form>
+    <mat-card >
+      <mat-card-content *ngIf="categories$ | async as categories">
+        <app-product-form [categories]="categories" (submitted)="handleAdd($event)" ></app-product-form>
       </mat-card-content>
     </mat-card>
 

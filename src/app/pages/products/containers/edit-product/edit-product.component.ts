@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { switchMap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '@core/services/product.service';
+import {CategoryService} from '@core/services/category.service';
 
 @Component({
   selector: 'app-edit-product',
@@ -14,10 +15,12 @@ export class EditProductComponent {
     // tslint:disable-next-line:no-non-null-assertion
     return this.productService.getById(params.get('id')!);
   }));
+  categories$ = this.categoryService.allCategories();
 
   constructor(
     private route: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
+    private categoryService: CategoryService
   ) { }
 
   handleEdit(): void {

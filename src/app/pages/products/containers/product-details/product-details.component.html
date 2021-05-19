@@ -17,8 +17,8 @@
     </div>
 
     <mat-card>
-      <mat-card-content>
-        <app-product-form [product]="product" [readonly]="true"></app-product-form>
+      <mat-card-content *ngIf="categories$ | async as categories">
+        <app-product-form [product]="product" [categories]="categories" [readonly]="true"></app-product-form>
       </mat-card-content>
     </mat-card>
 

@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '@core/services/product.service';
 import { ProductDetails } from '@core/models/product.model';
+import {CategoryService} from '@core/services/category.service';
 
 @Component({
   selector: 'app-add-product',
@@ -12,13 +13,10 @@ import { ProductDetails } from '@core/models/product.model';
 export class AddProductComponent {
 
   constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private productsService: ProductService,
-    private activatedRoute: ActivatedRoute,
-    private route: Router
+    private categoryService: CategoryService
   ) {}
 
+  categories$ = this.categoryService.allCategories();
   handleAdd(product: ProductDetails): void {
     // this.productsService.addProduct()
   }
