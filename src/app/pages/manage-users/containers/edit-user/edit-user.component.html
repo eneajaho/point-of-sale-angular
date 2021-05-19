@@ -1,37 +1,27 @@
-<div class="container" *ngIf="!loading; else loadingTemplate">
-  <div class="d-flex align-items-center mb-3">
-  <button routerLink="/manage-users" class="mr-2" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
-    <mat-icon>arrow_back</mat-icon>
-  </button>
-  <h1 class="mb-0">Edit User</h1>
-  </div>
-  <form [formGroup]="form">
-    <div class="d-flex flex-column">
-      <mat-form-field appearance="outline">
-        <mat-label>Name</mat-label>
-        <input formControlName="name"  matInput placeholder="John Doe">
-      </mat-form-field>
-      <mat-form-field  appearance="outline">
-        <mat-label>Email</mat-label>
-        <input formControlName="email" matInput placeholder="johndoe@gmail.com">
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-select formControlName="role">
-          <mat-option *ngFor="let role of roles" [value]="role.value">
-            {{role.label}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-6">
+      <div class="d-flex align-items-center mb-3">
+        <button routerLink="/manage-users" class="mr-2" mat-icon-button>
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <h1 class="mb-0">Edit User</h1>
+      </div>
+
+      <mat-card>
+        <mat-card-content *ngIf="user$ | async as user; else loading" @fadeIn>
+          <app-user-form [user]="user" (submitted)="handleEdit($event)"></app-user-form>
+        </mat-card-content>
+
+        <ng-template #loading>
+          <div class="flex-center">
+            <mat-spinner></mat-spinner>
+          </div>
+        </ng-template>
+
+      </mat-card>
+
     </div>
-  </form>
-  <div class="d-flex justify-content-end">
-    <button [disabled]="form.invalid || form.untouched" class="mx-1" mat-raised-button color="primary" (click)="submit()">
-      <mat-icon>save</mat-icon> Save
-    </button>
   </div>
+
 </div>
-<ng-template  #loadingTemplate>
-  <div class="center">
-    <mat-spinner></mat-spinner>
-  </div>
-</ng-template>

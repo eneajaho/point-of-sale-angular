@@ -1,24 +1,33 @@
-<ng-container *ngIf="users$ | async as data; else loading">
-  <div class="container">
+<div class="container pb-5">
 
-    <div class="d-flex justify-content-between align-items-center mb-3">
-      <div class="d-flex align-items-center">
-        <h1 class="m-0">Users</h1>
-        <button class="mx-3" routerLink="add" mat-button color="primary">
-          <mat-icon class="mr-2">person_add</mat-icon> <span>Add user</span>
-        </button>
-      </div>
-      <mat-form-field appearance="outline">
-        <mat-label>Search</mat-label>
-        <input matInput placeholder="ex. John Doe" (keydown)="filterUsers($any($event.target).value)">
-        <mat-icon matSuffix>search</mat-icon>
-      </mat-form-field>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="d-flex align-items-center">
+      <h1 class="m-0">Users</h1>
+      <button class="mx-3" routerLink="add" mat-button color="primary">
+        <mat-icon class="mr-2">person_add</mat-icon>
+        <span>Add user</span>
+      </button>
     </div>
-    <app-users-table (deletedId)="delete($event)" [data]="data"></app-users-table>
+    <mat-form-field appearance="outline">
+      <mat-label>Search</mat-label>
+      <input matInput placeholder="ex. John Doe" (keydown)="filterUsers($any($event.target).value)">
+      <mat-icon matSuffix>person_search</mat-icon>
+    </mat-form-field>
   </div>
-</ng-container>
-<ng-template #loading>
-  <div class="center">
-    <mat-spinner></mat-spinner>
-  </div>
-</ng-template>
+
+  <ng-container *ngIf="users$ | async as data; else loading">
+    <app-users-table
+      *ngIf="data.length > 0" @fadeIn
+      [data]="data">
+    </app-users-table>
+  </ng-container>
+
+  <ng-template #loading>
+    <div class="center">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>
+
+
+</div>
+

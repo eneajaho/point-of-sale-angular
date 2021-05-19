@@ -12,22 +12,9 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   styleUrls: ['./users-table.component.scss']
 })
 export class UsersTableComponent {
+
   @Input() data: User[] = [];
+
   displayedColumns: string[] = ['id', 'name', 'email', 'role'];
-  @Output() deletedId = new EventEmitter<number>();
-  constructor(public dialog: MatDialog) {
-  }
 
-  openDialog(id: number): void {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      width: '250px',
-      disableClose: true
-    });
-
-    dialogRef.afterClosed().pipe(take(1)).subscribe(result => {
-      if (!!result) {
-        this.deletedId.emit(id);
-      }
-    });
-  }
 }

@@ -1,11 +1,7 @@
-.full-width {
-  width: 100%;
-}
-
 .mat-input-element:disabled, .mat-form-field-type-mat-native-select.mat-form-field-disabled .mat-form-field-infix::after {
   color: black;
 }
 
-.mat-select-disabled .mat-select-value {
-  color: rgb(0 0 0);
+::ng-deep .mat-select-disabled .mat-select-value {
+  color: black;
 }

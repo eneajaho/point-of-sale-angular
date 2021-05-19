@@ -1,0 +1,53 @@
+<form [formGroup]="form" (ngSubmit)="handleSubmit()">
+  <div class="d-flex flex-column">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input formControlName="name" matInput placeholder="John Doe">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input formControlName="email" matInput placeholder="johndoe@gmail.com">
+    </mat-form-field>
+
+<!--    <mat-form-field *ngIf="!readonly" appearance="outline">-->
+<!--      <mat-label>Password</mat-label>-->
+<!--      <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">-->
+<!--      <button mat-icon-button matSuffix (click)="hide = !hide"-->
+<!--              [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">-->
+<!--        <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>-->
+<!--      </button>-->
+<!--    </mat-form-field>-->
+
+    <mat-error *ngIf="password?.errors?.hasNumber">
+      Password should contain at least one number.
+    </mat-error>
+    <mat-error *ngIf="password?.errors?.hasCapitalCase">
+      Password should contain at least one capital case.
+    </mat-error>
+    <mat-error *ngIf="password?.errors?.hasSpecialCharacters">
+      Password should contain at least one special
+      character.
+    </mat-error>
+    <mat-error *ngIf="password?.errors?.minlength">
+      Password should contain at least 8 characters.
+    </mat-error>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Role</mat-label>
+      <mat-select formControlName="role">
+        <mat-option *ngFor="let role of roles" [value]="role.value">
+          {{role.label}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button *ngIf="!readonly" [disabled]="form.invalid" class="mx-1 py-2"
+            mat-raised-button color="primary">
+      <mat-icon class="mr-2">save</mat-icon>
+      <span>Save</span>
+    </button>
+
+  </div>
+</form>

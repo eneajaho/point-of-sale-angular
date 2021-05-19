@@ -1,0 +1,19 @@
+.profile-card {
+  min-width: 420px;
+}
+
+.avatar {
+  position: relative;
+  height: 120px;
+  width: 120px;
+}
+
+.role-badge {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background: #97ABFF;
+  position: absolute;
+  bottom: 10%;
+  right: 10%;
+}

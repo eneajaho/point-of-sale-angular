@@ -1,46 +1,20 @@
 <div class="container">
-  <div class="d-flex align-items-center mb-3">
-    <button routerLink="../" class="mr-2" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
-      <mat-icon>arrow_back</mat-icon>
-    </button>
-    <h1 class="mb-0">Create User</h1>
-  </div>
-  <form [formGroup]="form">
-    <div class="d-flex flex-column">
-  <mat-form-field appearance="outline">
-    <mat-label>Name</mat-label>
-    <input formControlName="name"  matInput placeholder="John Doe">
-  </mat-form-field>
-  <mat-form-field  appearance="outline">
-    <mat-label>Email</mat-label>
-    <input formControlName="email" matInput placeholder="johndoe@gmail.com">
-  </mat-form-field>
-      <mat-form-field  appearance="outline">
-        <mat-label>Password</mat-label>
-        <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
-        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-6">
+      <div class="d-flex align-items-center mb-3">
+        <button routerLink="../" class="mr-2" mat-icon-button>
+          <mat-icon>arrow_back</mat-icon>
         </button>
-      </mat-form-field>
-      <mat-error *ngIf="password?.errors?.hasNumber">Password should contain at least one number.</mat-error>
-      <mat-error *ngIf="password?.errors?.hasCapitalCase">Password should contain at least one capital case.</mat-error>
-      <mat-error *ngIf="password?.errors?.hasSpecialCharacters">Password should contain at least one special character.</mat-error>
-      <mat-error *ngIf="password?.errors?.minlength">Password should contain at least 8 characters.</mat-error>
-      <mat-form-field appearance="outline">
-        <mat-label>Role</mat-label>
-        <mat-select formControlName="role">
-          <mat-option *ngFor="let role of roles" [value]="role.value">
-            {{role.label}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-  </form>
-  <div class="d-flex justify-content-end">
-    <button [disabled]="form.invalid" class="mx-1" mat-raised-button color="primary" (click)="submit()">
-      <mat-icon>save</mat-icon> Save
-    </button>
+        <h1 class="mb-0">Add User</h1>
+      </div>
 
+      <mat-card>
+        <mat-card-content>
+          <app-user-form (submitted)="handleAdd($event)"></app-user-form>
+        </mat-card-content>
+      </mat-card>
+
+    </div>
   </div>
 
 </div>

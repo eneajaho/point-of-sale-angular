@@ -16,6 +16,8 @@ import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import { UserDetailsComponent } from './containers/user-details/user-details.component';
 import {MatIconModule} from '@angular/material/icon';
 import {ConfirmationDialogModule} from '@app/pages/manage-users/components/confirmation-dialog/confirmation-dialog.module';
+import { MatCardModule } from '@angular/material/card';
+import { UserFormComponent } from './components/user-form/user-form.component';
 
 
 const routes: Routes = [
@@ -47,7 +49,8 @@ const routes: Routes = [
     UsersTableComponent,
     AddUserComponent,
     EditUserComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    UserFormComponent
   ],
   imports: [
     CommonModule,
@@ -61,7 +64,8 @@ const routes: Routes = [
     MatSelectModule,
     MatSnackBarModule,
     MatIconModule,
-    ConfirmationDialogModule
+    ConfirmationDialogModule,
+    MatCardModule
   ]
 })
 export class ManageUsersModule {

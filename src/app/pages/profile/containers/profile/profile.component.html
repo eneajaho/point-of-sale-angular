@@ -1,1 +1,77 @@
-<p>profile works!</p>
+<div *ngIf="user$ | async as user; else loading" class="container d-flex justify-content-center">
+
+  <mat-card class="mt-3 py-3 profile-card ">
+    <mat-card-content class="py-3 d-flex flex-column justify-content-center align-items-center">
+      <div class="avatar">
+
+        <img src="assets/user.png" height="120">
+        <div class="role-badge"></div>
+
+      </div>
+
+      <div class="my-3 d-flex flex-column justify-content-center align-items-center">
+
+        <h1 style="cursor: pointer" @fadeIn *ngIf="!editName" (dblclick)="editName = true"
+            class="my-2">{{user.name}}</h1>
+
+        <div @fadeIn *ngIf="editName" class="d-flex flex-column my-4">
+          <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Ex. John Doe" [(ngModel)]="nameInput" [value]="user.name">
+          </mat-form-field>
+          <div class="d-flex justify-content-center">
+            <button mat-button (click)="editName = false" color="warn">Close</button>
+            <button mat-button (click)="submitName()" color="primary">Save</button>
+          </div>
+        </div>
+
+        <h3>{{user.email}}</h3>
+        <button @fadeIn mat-flat-button color="primary" *ngIf="!changePassword" (click)="changePassword = true">
+          Reset Password
+        </button>
+
+        <div @fadeIn *ngIf="changePassword">
+
+          <form [formGroup]="changePasswordForm" class="d-flex flex-column">
+            <mat-form-field>
+              <mat-label>Old Password</mat-label>
+              <input type="password" matInput formControlName="oldPassword">
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>New Password</mat-label>
+              <input type="password" matInput formControlName="newPassword">
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Confirm Password</mat-label>
+              <input type="password" matInput formControlName="confirmPassword">
+            </mat-form-field>
+            <mat-error *ngIf="changePasswordForm?.errors?.notSame">Passwords does not match.</mat-error>
+
+            <div class="d-flex justify-content-center">
+              <button mat-button (click)="changePassword = false" color="warn">Close</button>
+              <button
+                [disabled]="changePasswordForm.invalid"
+                type="submit"
+                mat-button
+                (click)="submitChangePassword()"
+                color="primary">
+                Save
+              </button>
+            </div>
+          </form>
+
+        </div>
+
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<ng-template #loading>
+
+  <div class="flex-center">
+  <mat-spinner  mode="indeterminate"></mat-spinner>
+  </div>
+</ng-template>
