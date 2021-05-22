@@ -16,7 +16,7 @@ export class AddProductComponent {
     private categoryService: CategoryService
   ) {}
 
-  categories$ = this.categoryService.allCategories();
+  categories$ = this.categoryService.all();
   handleAdd(product: ProductDetails): void {
     // this.productsService.addProduct()
   }

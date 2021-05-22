@@ -46,6 +46,8 @@ export class ProductFormComponent implements OnInit {
     if (this.product) {
       console.log(this.product);
       this.form.patchValue(this.product);
+      this.form.get('stock_type')?.patchValue(this.product.stock.type);
+      this.form.get('category_id')?.patchValue(this.product.category.id);
     }
     if (this.readonly) {
       this.form.disable();

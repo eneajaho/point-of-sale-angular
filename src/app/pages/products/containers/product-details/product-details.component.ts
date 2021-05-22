@@ -15,7 +15,7 @@ export class ProductDetailsComponent {
     // tslint:disable-next-line:no-non-null-assertion
     return this.productService.getById(params.get('id')!);
   }));
-  categories$ = this.categoryService.allCategories();
+  categories$ = this.categoryService.all();
 
   constructor(
     private categoryService: CategoryService,
