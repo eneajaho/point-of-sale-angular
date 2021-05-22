@@ -1,12 +1,12 @@
-import {Inject, Injectable} from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Product, ProductDetails } from '../models/product.model';
-import {Pagination} from '../models/pagination.model';
-import {ProductsFilter} from '../models/products-filter.model';
-import {BehaviorSubject, Observable, of} from 'rxjs';
-import {catchError, distinctUntilChanged, tap} from 'rxjs/operators';
-import {createParamsFromObject} from '../utils/create-params-from-object';
-import {HttpClient} from '@angular/common/http';
-import {API_URL} from '@core/api.token';
+import { Pagination } from '../models/pagination.model';
+import { ProductsFilter } from '../models/products-filter.model';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { catchError, distinctUntilChanged, tap } from 'rxjs/operators';
+import { createParamsFromObject } from '../utils/create-params-from-object';
+import { HttpClient } from '@angular/common/http';
+import { API_URL } from '@core/api.token';
 
 
 export interface ProductsState {
@@ -20,7 +20,7 @@ export interface ProductsState {
 
 const initialState: ProductsState = {
   data: [],
-  pagination: {pageSize: 10, pageIndex: 0, total: 0},
+  pagination: { pageSize: 10, pageIndex: 0, total: 0 },
   filters: null,
   error: null,
   loading: false,
@@ -39,18 +39,20 @@ export class ProductService {
     return this.state.getValue();
   }
 
-  constructor(private http: HttpClient, @Inject(API_URL) private api: string) {}
+  constructor(private http: HttpClient, @Inject(API_URL) private api: string) {
+  }
 
-  private getProducts(filters: Partial<ProductsFilter> = {},
-                      pagination: Pagination): Observable<any> {
-    // { data: Product[], pagination: Pagination }
+  getProducts(
+    filters: Partial<ProductsFilter> = {},
+    pagination: Pagination
+  ): Observable<any> {
 
-    const path = `${this.api}/products`;
+    const path = `${ this.api }/products`;
     const params = createParamsFromObject(filters)
       .append('page', pagination.pageIndex + '')
       .append('pageSize', pagination.pageSize + '');
 
-    return this.http.get<any>(path, {params});
+    return this.http.get<any>(path, { params });
   }
 
   private setData(data: Product[], pagination: Pagination): void {
@@ -69,7 +71,7 @@ export class ProductService {
 
   loadProducts(filters?: ProductsFilter, pagination?: Partial<Pagination>): Observable<any> {
     const currentPagination = this.currentState.pagination;
-    const newPagination = pagination ? {...currentPagination, ...pagination} : currentPagination;
+    const newPagination = pagination ? { ...currentPagination, ...pagination } : currentPagination;
     const newFilters = filters ?? this.currentState.filters;
 
     this.state.next({
@@ -83,7 +85,7 @@ export class ProductService {
     return this.getProducts(this.currentState.filters ?? {}, this.currentState.pagination).pipe(
       tap(
         (res) => {
-          const samplePagination: Pagination = {pageSize: +res.per_page, pageIndex: res.current_page, total: res.total};
+          const samplePagination: Pagination = { pageSize: +res.per_page, pageIndex: res.current_page, total: res.total };
 
           return this.setData(res.data, samplePagination);
         }
@@ -96,16 +98,16 @@ export class ProductService {
   }
 
   getById(id: string): Observable<ProductDetails> {
-    return this.http.get<ProductDetails>(`${this.api}/products/${id}`);
+    return this.http.get<ProductDetails>(`${ this.api }/products/${ id }`);
   }
 
   createProduct(value: any): Observable<Product> {
-    const path = `${this.api}/products`;
+    const path = `${ this.api }/products`;
     return this.http.post<Product>(path, value);
   }
 
   updateProduct(id: number, body: any): Observable<Product> {
-    const path = `${this.api}/products/${id}`;
+    const path = `${ this.api }/products/${ id }`;
     return this.http.patch<Product>(path, body);
   }
 }

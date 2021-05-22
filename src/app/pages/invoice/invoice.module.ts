@@ -4,6 +4,8 @@ import { InvoiceComponent } from './invoice.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 
 const routes: Routes = [
@@ -19,7 +21,9 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     MatInputModule,
-    MatCardModule
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule
   ],
   exports: [RouterModule]
 })
