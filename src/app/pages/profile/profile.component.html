@@ -17,16 +17,17 @@
         <div @fadeIn *ngIf="editName" class="d-flex flex-column my-4">
           <mat-form-field>
             <mat-label>Name</mat-label>
-            <input matInput placeholder="Ex. John Doe" [(ngModel)]="nameInput" [value]="user.name">
+            <input matInput placeholder="Ex. John Doe" #nameInput [value]="user.name">
           </mat-form-field>
           <div class="d-flex justify-content-center">
             <button mat-button (click)="editName = false" color="warn">Close</button>
-            <button mat-button (click)="submitName()" color="primary">Save</button>
+            <button mat-button (click)="submitName(nameInput.value)" color="primary">Save</button>
           </div>
         </div>
 
         <h3>{{user.email}}</h3>
-        <button @fadeIn mat-flat-button color="primary" *ngIf="!changePassword" (click)="changePassword = true">
+        <button @fadeIn mat-flat-button color="primary"
+                *ngIf="!changePassword" (click)="changePassword = true">
           Reset Password
         </button>
 
@@ -51,12 +52,8 @@
 
             <div class="d-flex justify-content-center">
               <button mat-button (click)="changePassword = false" color="warn">Close</button>
-              <button
-                [disabled]="changePasswordForm.invalid"
-                type="submit"
-                mat-button
-                (click)="submitChangePassword()"
-                color="primary">
+              <button (click)="submitChangePassword()" [disabled]="changePasswordForm.invalid"
+                      type="submit" mat-button color="primary">
                 Save
               </button>
             </div>

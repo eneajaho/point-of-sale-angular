@@ -1,10 +1,10 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
-import {AuthService} from '@core/services/auth.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {take} from 'rxjs/operators';
-import {handleServerSideValidation} from '@core/utils/server-side-validation';
-import {HttpErrorResponse} from '@angular/common/http';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from '@core/services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { take } from 'rxjs/operators';
+import { handleServerSideValidation } from '@core/utils/server-side-validation';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',

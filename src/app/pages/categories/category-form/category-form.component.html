@@ -1,0 +1,47 @@
+<h1 mat-dialog-title>
+  <span *ngIf="data.type === 'add'">Add</span>
+  <span *ngIf="data.type === 'edit'">Edit</span>
+  Category
+</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input formControlName="name" matInput placeholder="Cold">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Icon</mat-label>
+      <input formControlName="icon" type="text" matInput>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Color</mat-label>
+      <input formControlName="color" type="color" matInput>
+    </mat-form-field>
+
+    <ng-container *ngIf="form.get('name')?.value !== ''">
+      <h3>Preview: </h3>
+
+      <button mat-button type="button" [style.color]=" form.get('color')?.value ">
+        <mat-icon *ngIf="form.get('icon')?.value !== ''" class="mr-2">
+          {{ form.get('icon')?.value }}
+        </mat-icon>
+        <span>{{ form.get('name')?.value }}</span>
+      </button>
+      <br>
+    </ng-container>
+
+    <div>
+      <button
+        [disabled]="form.invalid"
+        mat-flat-button [mat-dialog-close]="form.value"
+        color="primary" type="submit" class="mr-2">
+        Save
+      </button>
+      <button mat-button color="warn" type="button" mat-dialog-close>Cancel</button>
+    </div>
+
+  </form>
+</div>

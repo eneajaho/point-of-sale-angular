@@ -1,10 +1,10 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {EmptyLayoutComponent} from './layout/containers/empty-layout/empty-layout.component';
-import {MainLayoutComponent} from './layout/containers/main-layout/main-layout.component';
-import {AuthGuard} from '@core/guards/auth.guard';
-import {NonAuthGuard} from '@core/guards/non-auth.guard';
-import {RoleGuard} from '@core/guards/role.guard';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { EmptyLayoutComponent } from './layout/containers/empty-layout/empty-layout.component';
+import { MainLayoutComponent } from './layout/containers/main-layout/main-layout.component';
+import { AuthGuard } from '@core/guards/auth.guard';
+import { NonAuthGuard } from '@core/guards/non-auth.guard';
+import { RoleGuard } from '@core/guards/role.guard';
 
 const routes: Routes = [
   {
@@ -13,14 +13,14 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: '', component: EmptyLayoutComponent, canActivate: [NonAuthGuard], children: [
+    path: '', component: EmptyLayoutComponent, canActivate: [ NonAuthGuard ], children: [
       {
         path: 'auth', loadChildren: () => import('./pages/auth/auth.module').then(m => m.AuthModule)
       },
     ]
   },
   {
-    path: '', component: MainLayoutComponent, canActivate: [AuthGuard], children: [
+    path: '', component: MainLayoutComponent, canActivate: [ AuthGuard ], children: [
       {
         path: '',
         redirectTo: 'products',
@@ -28,13 +28,13 @@ const routes: Routes = [
       },
       {
         path: 'products',
-        canActivate: [RoleGuard],
+        canActivate: [ RoleGuard ],
         data: {},
         loadChildren: () => import('./pages/products/products.module').then(m => m.ProductsModule)
       },
       {
         path: 'manage-users',
-        canActivate: [RoleGuard],
+        canActivate: [ RoleGuard ],
         loadChildren: () => import('./pages/manage-users/manage-users.module').then(m => m.ManageUsersModule)
       },
       {
@@ -45,13 +45,25 @@ const routes: Routes = [
         path: 'settings',
         loadChildren: () => import('./pages/settings/settings.module').then(m => m.SettingsModule)
       },
+      {
+        path: 'shifts',
+        loadChildren: () => import('./pages/shifts/shifts.module').then(m => m.ShiftsModule)
+      },
+      {
+        path: 'categories',
+        loadChildren: () => import('./pages/categories/categories.module').then(m => m.CategoriesModule)
+      },
+      {
+        path: 'invoice',
+        loadChildren: () => import('./pages/invoice/invoice.module').then(m => m.InvoiceModule)
+      },
     ]
-  }
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [ RouterModule.forRoot(routes) ],
+  exports: [ RouterModule ]
 })
 export class AppRoutingModule {
 }

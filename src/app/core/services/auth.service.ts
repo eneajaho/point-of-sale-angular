@@ -34,13 +34,14 @@ export class AuthService {
     @Inject(API_URL) private api: string,
     private http: HttpClient,
     private router: Router
-  ) {
-  }
+  ) {}
 
   private auth = new BehaviorSubject<AuthState>(this.getLocalState());
   public auth$ = this.auth.asObservable().pipe(distinctUntilChanged(),
     tap(x => console.log('auth', x))
   );
+
+  get state(): AuthState { return this.auth.getValue(); }
 
   adminExists$ = this.http.get<{ exists: boolean }>(`${this.api}/adminExists`).pipe(
     shareReplay(1),
@@ -70,6 +71,16 @@ export class AuthService {
   createAdmin(payload: CreateAdminPayload): Observable<{ message: string }> {
     const path = `${this.api}/createAdmin`;
     return this.http.post<{ message: string }>(path, payload);
+  }
+
+  changeName(name: string): Observable<User> {
+    return this.http.post<User>(`${this.api}/auth/changeName`, { name }).pipe(
+      tap(_ => this.auth.next({ ...this.auth.getValue(), name }))
+    );
+  }
+
+  changePassword(payload: any): Observable<User> {
+    return this.http.post<User>(`${this.api}/auth/changePassword`, payload);
   }
 
   logout(): void {

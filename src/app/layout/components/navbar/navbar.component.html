@@ -3,15 +3,15 @@
     <div>Amigos - POS</div>
     <div class="ml-5">
 
-      <button *ngFor="let item of navItems"
-              [routerLink]="[ item.path ]" mat-button
-              routerLinkActive="active">
-        <mat-icon class="mr-2">{{ item.icon }}</mat-icon>
-        <span>{{ item.label }}</span>
-      </button>
-      <!--        *appHasRole=[item.roles]-->
+      <ng-container *ngFor="let item of navItems">
+        <button *ngIf="item.roles.includes(auth.state.role!) || item.roles.length === 0"
+                [routerLink]="[ item.path ]" mat-button
+                routerLinkActive="active" class="mr-2">
+          <mat-icon class="mr-2">{{ item.icon }}</mat-icon>
+          <span>{{ item.label }}</span>
+        </button>
+      </ng-container>
 
-<!--      <button mat-button>Users</button>-->
     </div>
   </div>
   <div>
@@ -27,7 +27,7 @@
             <span>Profile</span>
           </span>
       </button>
-      <button mat-menu-item (click)="logout()">
+      <button mat-menu-item (click)="auth.logout()">
           <span class="d-flex align-items-center">
             <span class="material-icons mr-1">logout</span>
             <span>Logout</span>

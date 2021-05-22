@@ -4,25 +4,21 @@ import { HttpClient } from '@angular/common/http';
 import { API_URL } from '@core/api.token';
 import { Category } from '@core/models/Category';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class CategoryService {
 
-  constructor(private http: HttpClient, @Inject(API_URL) private api: string) {}
+  constructor(@Inject(API_URL) private api: string, private http: HttpClient) {}
 
-  allCategories(): Observable<Category[]> {
-    const path = `${this.api}/categories`;
-    return this.http.get<Category[]>(path);
+  all(): Observable<Category[]> {
+    return this.http.get<Category[]>(`${this.api}/categories`);
   }
 
-  createCategory(value: any): Observable<Category> {
-    const path = `${this.api}/categories`;
-    return this.http.post<Category>(path, value);
+  create(value: any): Observable<Category> {
+    return this.http.post<Category>(`${this.api}/categories`, value);
   }
 
-  updateCategory(id: number, body: any): Observable<Category> {
-    const path = `${this.api}/categories/${id}`;
-    return this.http.patch<Category>(path, body);
+  update(id: number, body: any): Observable<Category> {
+    return this.http.patch<Category>(`${this.api}/categories/${id}`, body);
   }
+
 }

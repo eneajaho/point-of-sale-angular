@@ -34,7 +34,7 @@ export class CreateAdminComponent implements OnInit {
       take(1),
     ).subscribe(({ exists }) => {
         if (exists) {
-          this.router.navigateByUrl('/auth');
+          this.router.navigateByUrl('/auth/login');
         } else {
           this.showForm = true;
         }

@@ -1,0 +1,33 @@
+<div class="container pb-5">
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="d-flex align-items-center">
+      <h1 class="m-0">Shifts</h1>
+      <button class="mx-3" (click)="addShift()" mat-button color="primary">
+        <mat-icon class="mr-2">more_time</mat-icon>
+        <span>Add shift</span>
+      </button>
+    </div>
+    <button (click)="refresh()" mat-button color="primary">
+      <mat-icon class="mr-2">refresh</mat-icon>
+      <span>Refresh</span>
+    </button>
+  </div>
+
+  <ng-container *ngIf="shifts$ | async as data; else loading">
+    <app-shifts-table
+      *ngIf="data.length > 0" @fadeIn
+      [data]="data"
+      (opened)="editShift($event)">
+    </app-shifts-table>
+  </ng-container>
+
+  <ng-template #loading>
+    <div class="flex-center">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>
+
+
+</div>
+

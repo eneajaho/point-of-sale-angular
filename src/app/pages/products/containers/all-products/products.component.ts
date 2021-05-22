@@ -14,7 +14,7 @@ import { fadeIn } from '@app/animations/fadeIn.animation';
 export class ProductsComponent implements OnInit {
 
   vm$ = this.productsService.state$;
-  categories$ = this.categoryService.allCategories();
+  categories$ = this.categoryService.all();
 
   displayedColumns: string[] = [
     'id',

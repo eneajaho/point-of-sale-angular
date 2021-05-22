@@ -13,17 +13,12 @@ import {pluck} from 'rxjs/operators';
 export class NavbarComponent {
 
   navItems = this.layoutService.navItems;
-  name$: Observable<string | null> = this.auth.auth$.pipe(pluck('name'));
+
+  name$ = this.auth.auth$.pipe(pluck('name'));
 
   constructor(
     private layoutService: LayoutService,
-    private auth: AuthService
-  ) {
-    this.name$.subscribe(console.log);
-  }
-
-  logout(): void {
-    this.auth.logout();
-  }
+    public auth: AuthService
+  ) { }
 
 }
